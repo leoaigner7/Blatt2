@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "p2p.master.url",
+      "type": "java.lang.String",
+      "description": "Where to find the master."
+    },
+    {
+      "name": "timing.pingtask.initialDelay",
+      "type": "java.lang.String",
+      "description": "How long before the first ping."
+    }
+  ] }

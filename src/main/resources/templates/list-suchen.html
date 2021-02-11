@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="head::head"></head>
+<body>
+	<div class="container-fluid">
+		<h1>Fahrtenbuch</h1>
+	</div>
+	<div th:include="menu::menu"></div>
+	<div class="container-fluid"><h2 th:text="${title}">Willkommen!</h2></div>
+	<div class="container-fluid"><p th:text="${message}">Text</p></div>
+	<div class="container-fluid">
+		<table class="table table-striped table-hover">
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<th>Suchbegriff</th>
+					<th>Ergebnis</th>
+				</tr>
+				<tr th:each="treffer : ${ergebnisse}">
+					<td th:text="${treffer.getUid()}">0</td>
+					<td th:text="${treffer.getUid()}">0</td>
+					<td th:text="${treffer.getResponse()}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:include="foot::foot"></div>
+</body>
+</html>  

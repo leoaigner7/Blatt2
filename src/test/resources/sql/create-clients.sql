@@ -1,0 +1,1 @@
+INSERT INTO tbl_client(created, last_seen, nodeid) VALUES ('2021-02-12 10:33:15.760348', '2021-02-12 10:33:15.760348', 'master:8080');
