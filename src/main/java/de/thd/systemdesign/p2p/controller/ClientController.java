@@ -53,7 +53,7 @@ public class ClientController {
                 .limit(3)
                 .collect(java.util.stream.Collectors.toList());
 
-        return new PongMessage(name);
+        return new PongMessage(name, nodes);
     }
 
 }

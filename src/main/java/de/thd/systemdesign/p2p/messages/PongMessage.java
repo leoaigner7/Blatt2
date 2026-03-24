@@ -12,7 +12,7 @@ public class PongMessage extends P2PMessage {
     private List<String> nodes = new ArrayList<>();
     private PongMessage() {}
 
-    public PongMessage(String nodeid) {
+    public PongMessage(String nodeid,  List<String> nodes) {
         this.source = nodeid;
         this.nodes = nodes;
     }
