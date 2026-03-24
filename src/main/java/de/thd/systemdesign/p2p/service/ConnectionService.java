@@ -43,6 +43,8 @@ public class ConnectionService {
             }
         });
     }
+    // In ConnectionService.java ergänzen:
+    public RestTemplate getRestTemplate() { return restTemplate; }
 
     // TODO: Merge sendMessage and forwardMessage
     // currently i like it because of the improved readability

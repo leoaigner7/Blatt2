@@ -2,6 +2,7 @@ package de.thd.systemdesign.p2p.service;
 
 import de.thd.systemdesign.p2p.config.NodeConfig;
 import de.thd.systemdesign.p2p.dto.P2PClientDto;
+import de.thd.systemdesign.p2p.messages.P2PMessage;
 import de.thd.systemdesign.p2p.messages.PingMessage;
 import de.thd.systemdesign.p2p.model.P2PClient;
 import de.thd.systemdesign.p2p.repository.ClientRepository;
@@ -18,6 +19,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import de.thd.systemdesign.p2p.messages.PongMessage;
 
 @Service
 public class ClientService {
@@ -89,7 +95,17 @@ public class ClientService {
 
     public void doPing(String nodeid) {
         PingMessage pingMessage = new PingMessage(cfg.getNode());
-        connectionService.sendTo(nodeid, pingMessage);
+        String url = String.format("http://%s/ping/", nodeid);
+        HttpEntity<P2PMessage> entity = new HttpEntity<>(pingMessage);
+        ResponseEntity<PongMessage> response = connectionService.getRestTemplate().postForEntity(url, entity, PongMessage.class);
+        if (response.getBody() != null && response.getBody().getNodes() != null) {
+            for (String node : response.getBody().getNodes()) {
+                if (!node.equals(cfg.getNode())) {
+                    addOrTouch(new P2PClient(node));
+    }
+            }
+        }
+
     }
 
     // Not Transactional

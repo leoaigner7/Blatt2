@@ -46,6 +46,13 @@ public class ClientController {
         log.info("Ping from : " + msg.getSource());
         String name = Utils.getNodeName(request);
         clientService.gotPing(msg.getSource());
+
+        List<String> nodes = clientService.findAllDto().stream()
+                .map(P2PClientDto::getNodeid)
+                .filter(id -> !id.equals(msg.getSource()))
+                .limit(3)
+                .collect(java.util.stream.Collectors.toList());
+
         return new PongMessage(name);
     }
 
