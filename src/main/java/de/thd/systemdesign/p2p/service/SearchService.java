@@ -50,7 +50,7 @@ public class SearchService {
         ForwardedMessage msg = new ForwardedMessage(cfg.getNode());
         SearchMessage search = new SearchMessage(cfg.getNode(), thing);
         msg.setMsg(search);
-        msg.setHorizont(3);
+        msg.setHorizont(0);
         searchRepository.save(new Search(search.getUid(), search.getQuery()));
         connectionService.sendMessage(msg);
     }

@@ -1,7 +1,7 @@
 package de.thd.systemdesign.p2p.messages;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,14 +11,13 @@ import java.util.Set;
 public class ForwardedMessage extends P2PMessage {
     List<String> hops;
     P2PMessage msg;
-    @JsonProperty("horizont")  // NEU
     int horizont;
 
 
     public ForwardedMessage() {
         this.hops = new ArrayList<>();
         this.source = "";
-        this.horizont = 0;
+        this.horizont = 3;
     }
 
 
