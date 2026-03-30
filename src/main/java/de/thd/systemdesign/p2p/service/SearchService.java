@@ -50,7 +50,7 @@ public class SearchService {
         ForwardedMessage msg = new ForwardedMessage(cfg.getNode());
         SearchMessage search = new SearchMessage(cfg.getNode(), thing);
         msg.setMsg(search);
-        msg.setHorizont(0);
+        msg.setHorizont(3);
         searchRepository.save(new Search(search.getUid(), search.getQuery()));
         connectionService.sendMessage(msg);
     }
@@ -66,7 +66,8 @@ public class SearchService {
         msg.addHop(cfg.getNode());
 
 
-        // NEU: Horizont prüfen und dekrementieren
+        //Horizont wird geprüft. Bei 0 wird gestoppt, sunst -1 und weiterleiten
+        // NAch lokalen suche weil der Node den Inhalt haben könnte auch ohne dass er weiterleitet
         if (msg.getHorizont() <= 0) {
             log.info("Horizont erreicht – Nachricht wird nicht mehr weitergeleitet.");
             return;
